@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task2</title>
+    <script src="task2.js"></script>
+</head>
+
+<body>
+    <input type="file" onchange="previewFile()" id="text">
+
+    <script>
+        function previewFile() {
+            var reader = new FileReader();
+            var str = "";
+            reader.onloadend = function() {
+                str = reader.result;
+                console.log("Содержимое файла: " + str);
+                var letter = prompt("Enter letter", "h");
+                var newStr = writeSpecailWord(letter, str);
+                console.log("Содержимое нового файла: " + newStr);
+                //writeFile(newStr, file.files[0]);
+
+
+            }
+            var file = document.getElementById("text");
+            reader.readAsText(file.files[0]);
+
+        }
+
+        function writeFile(data, file) {
+
+            var bb = new Blob(data);
+            //bb.append(data);
+            var writer = new FileWriter(file);
+            // writer.onwrite = done;
+            // writer.onerror = error;
+            writer.write(bb);
+        }
+    </script>
+
+</body>
+
+</html>
